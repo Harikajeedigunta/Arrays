@@ -1,0 +1,105 @@
+Brute Force Approach:
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        int num=v[i];
+        int count=0;
+        for(int j=0;j<n;j++)
+        {
+            if(v[j]==num)
+            {
+                count++;
+            }
+        }
+        if(count==1)
+        {
+            cout<<num;
+        }
+    }
+}
+Time Complexity:O(n sq)
+Space Complexity:O(1)
+
+Better Approach 1:--->Using Hashing
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    int maxi=v[0];
+    for(int i=0;i<n;i++)
+    {
+        maxi=max(maxi,v[i]);
+    }
+    vector<int>hash(maxi+1,0);
+    for(int i=0;i<n;i++)
+    {
+        hash[v[i]]++;
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(hash[v[i]]==1)
+        {
+            cout<<v[i];
+        }
+    }
+}
+Time Complexity: O(N)+O(N)+O(N), where N = size of the array
+Reason: One O(N) is for finding the maximum, the second one is to hash the elements and the third one is to search the single element in the array.
+Space Complexity: O(maxElement+1) where maxElement = the maximum element of the array.
+
+Better approach 2:---->Hashing using map data structure
+#include<iostream>
+#include<vector>
+#include<map>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    map<int,int>mp;
+    for(int i=0;i<n;i++)
+    {
+        mp[v[i]]++;
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(mp[v[i]]==1)
+        {
+            cout<<v[i];
+        }
+    }
+}
+Time Complexity: O(N*logM) + O(M), where M = size of the map i.e. M = (N/2)+1. N = size of the array.
+Reason: We are inserting N elements in the map data structure and insertion takes logM time(where M = size of the map). So this results in the first term O(N*logM). The second term is to iterate the map and search the single element. In Java, HashMap generally takes O(1) time complexity for insertion and search. In that case, the time complexity will be O(N) + O(M).
+Note: The time complexity will be changed depending on which map data structure we are using. If we use unordered_map in C++, the time complexity will be O(N) for the best and average case instead of O(N*logM). But in the worst case(which rarely happens), it will be nearly O(N2).
+Space Complexity: O(M) as we are using a map data structure. Here M = size of the map i.e. M = (N/2)+1.
+
+Input:
+5
+1 2 1 2 3
+Output:
+3
