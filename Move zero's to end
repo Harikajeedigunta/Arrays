@@ -1,0 +1,132 @@
+C++ code:
+Method 1:
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    int nonzeroindex=0;
+    for(int i=0;i<n;i++)
+    {
+        if(v[i]!=0)
+        {
+           v[nonzeroindex]=v[i];
+           nonzeroindex++;
+        }
+    }
+    for(int i=nonzeroindex;i<n;i++)
+    {
+        v[i]=0;
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+}
+
+Method 2:
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    int j=0;
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(v[i]!=0)
+        {
+            swap(v[i],v[j]);
+            j++;
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+}
+
+Java Code:
+Method 1:
+import java.util.Scanner;
+import java.util.ArrayList;
+public class MoveZerosEnd
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        ArrayList<Integer>list=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            list.add(sc.nextInt());
+        }
+        int nonzeroindex=0;
+        for(int i=0;i<n;i++)
+        {
+            if(list.get(i)!=0)
+            {
+                list.set(nonzeroindex,list.get(i));
+                nonzeroindex++;
+            }
+        }
+        for(int i=nonzeroindex;i<n;i++)
+        {
+            list.set(i,0);
+        }
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(list.get(i)+" ");
+        }
+        
+    }
+}
+
+Method 2:
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+public class nonzeroindex
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        ArrayList<Integer>list=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            list.add(sc.nextInt());
+        }
+        int j=0;
+        for(int i=0;i<n;i++)
+        {
+            if(list.get(i)!=0)
+            {
+                Collections.swap(list,i,j);
+                j++;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(list.get(i)+" ");
+        }
+    }
+}
+Output:
+6 
+0 1 0 2 0 3
+Output:
+1 2 3 0 0 0 
