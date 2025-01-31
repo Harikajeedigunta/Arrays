@@ -1,0 +1,141 @@
+C++ Code:
+Method 1:
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    if(n==0)
+    {
+        return 0;
+    }
+    int i=0;
+    while(i<v.size()-1)
+    {
+        if(v[i]==v[i+1])
+        {
+            v.erase(v.begin()+i);
+        }
+        else 
+        {
+            i++;
+        }
+    }
+    for(int i=0;i<v.size();i++)
+    {
+        cout<<v[i]<<" ";
+    }
+}
+
+Method 2:
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    if(n==0)
+    {
+        return 0;
+    }
+    int j=1;
+    for(int i=1;i<n;i++)
+    {
+        if(v[i]!=v[i-1])
+        {
+            v[j]=v[i];
+            j++;
+        }
+    }
+    for(int i=0;i<j;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+}
+
+Java Code:
+Method 1:
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
+public class Removeduplicate
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        if(n==0) return;
+        ArrayList<Integer>list=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            list.add(sc.nextInt());
+        }
+        int i=0;
+        while(i<list.size()-1)
+        {
+           if(list.get(i).equals(list.get(i+1)))
+           {
+               list.remove(i);
+           }
+           else
+           {
+               i++;
+           }
+        }
+        for(i=0;i<list.size();i++)
+        {
+            System.out.print(list.get(i)+" ");
+        }
+    }
+}
+
+Method 2:
+ import java.util.Scanner;
+ import java.util.ArrayList;
+ public class RemoveDuplicates
+ {
+     public static void main(String[] args)
+     {
+         Scanner sc=new Scanner(System.in);
+         int n=sc.nextInt();
+         if(n==0) return;
+         ArrayList<Integer>list=new ArrayList<>();
+         for(int i=0;i<n;i++)
+         {
+             list.add(sc.nextInt());
+         }
+         int j=1;
+         for(int i=1;i<list.size();i++)
+         {
+             if(!list.get(i).equals(list.get(i-1)))
+             {
+                 list.set(j,list.get(i));
+                 j++;
+             }
+         }
+         for(int i=0;i<j;i++)
+         {
+             System.out.print(list.get(i)+" ");
+         }
+         
+     }
+ }
+
+Input:
+6
+1 1 2 2 3 3
+Output:
+1 2 3 
