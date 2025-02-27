@@ -1,0 +1,82 @@
+C++ Code:
+Method 1:Using Hashing
+#include<iostream>
+#include<vector>
+#include<climits>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>arr(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    int max_val=arr[0];
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]>max_val)
+        {
+            max_val=arr[i];
+        }
+    }
+    vector<int>hash(max_val+1,0);
+    for(int i=0;i<n;i++)
+    {
+        hash[arr[i]]+=1;
+    }
+    int max_fre=0,min_val=INT_MAX;
+    for(int i=0;i<=max_val;i++)
+    {
+        if(hash[i]>max_fre)
+        {
+            max_fre=hash[i];
+            min_val=i;
+        }
+        else if(hash[i]==max_fre && i<min_val)
+        {
+            min_val=i;
+        }
+    }
+    cout<<min_val;
+}
+
+Method 2:Using Unordered_map
+#include<iostream>
+#include<vector>
+#include<climits>
+#include<unordered_map>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>arr(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    int max_fre=0,min_ele=INT_MAX;
+    unordered_map<int,int>mp;
+    for(auto& num:arr)
+    {
+        mp[num]+=1;
+        max_fre=max(max_fre,mp[num]);
+    }
+    for(auto& pair:mp)
+    {
+        if(max_fre==pair.second)
+        {
+            min_ele=min(min_ele,pair.first);
+        }
+    }
+    cout<<min_ele;
+    
+}
+Input:
+6
+1 2 2 3 3 3
+
+Output:
+3
