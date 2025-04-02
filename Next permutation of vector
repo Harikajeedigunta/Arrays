@@ -1,0 +1,39 @@
+C++ Code:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    if(next_permutation(v.begin(),v.end()))
+    {
+        for(auto num:v)
+        {
+            cout<<num<<" ";
+        }
+    }
+    else 
+    {
+        sort(v.begin(),v.end());
+        for(auto num:v)
+        {
+            cout<<num<<" ";
+        }
+    }
+    cout<<endl;
+    
+}
+
+Input:
+3
+1 2 3
+
+Output:
+1 3 2 
