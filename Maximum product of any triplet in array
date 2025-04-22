@@ -1,0 +1,112 @@
+C++ Code:
+Method 1:Brute Force
+#include<iostream>
+#include<climits>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    int max_product=INT_MIN;
+    for(int i=0;i<n-2;i++)
+    {
+        for(int j=i+1;j<n-1;j++)
+        {
+            for(int k=j+1;k<n;k++)
+            {
+                max_product=max(max_product,v[i]*v[j]*v[k]);
+            }
+        }
+    }
+    cout<<max_product;
+}
+
+Method 2: Better Approach
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    sort(v.begin(),v.end());
+    int prod1=v[n-1]*v[n-2]*v[n-3];
+    int prod2=v[0]*v[1]*v[n-1];
+    int max_prod=max(prod1,prod2);
+    cout<<max_prod<<endl;
+}
+
+Method 3: Optimized Approach
+#include<iostream>
+#include<vector>
+#include<climits>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    int max_ele=INT_MIN,sec_max=INT_MIN,third_max=INT_MIN;
+    int min_ele=INT_MAX,sec_min=INT_MAX;
+    for(int i=0;i<n;i++)
+    {
+        if(v[i]>max_ele)
+        {
+            third_max=sec_max;
+            sec_max=max_ele;
+            max_ele=v[i];
+        }
+        else if(v[i]>sec_max)
+        {
+            third_max=sec_max;
+            sec_max=v[i];
+        }
+        else if(v[i]>third_max)
+        {
+            third_max=v[i];
+        }
+        
+        if(v[i]<min_ele)
+        {
+            sec_min=min_ele;
+            min_ele=v[i];
+        }
+        else if(v[i]<sec_min)
+        {
+            sec_min=v[i];
+        }
+    }
+    int prod1=max_ele*sec_max*third_max;
+    int prod2=min_ele*sec_min*max_ele;
+    cout<<max(prod1,prod2);
+}
+
+Input:
+5
+10 3 5 6 20
+
+Output:
+1200
+
+Input:
+5
+10 3 5 6 20
+
+Output:
+1200
