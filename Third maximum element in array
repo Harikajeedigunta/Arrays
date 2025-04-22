@@ -1,0 +1,69 @@
+C++ Code:
+Method 1:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    sort(v.begin(),v.end());
+    cout<<v[n-3]<<endl;
+}
+
+Method 2: 
+#include<iostream>
+#include<climits>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    int max_ele=INT_MIN;
+    int sec_max=INT_MIN;
+    int third_max=INT_MIN;
+    for(int i=0;i<n;i++)
+    {
+        if(v[i]>max_ele)
+        {
+            third_max=sec_max;
+            sec_max=max_ele;
+            max_ele=v[i];
+        }
+        else if(v[i]>sec_max && v[i]!=max_ele)
+        {
+            third_max=sec_max;
+            max_ele=v[i];
+        }
+        else if(v[i]>third_max && v[i]!=sec_max && v[i]!=max_ele)
+        {
+            third_max=v[i];
+        }
+    }
+    cout<<third_max<<endl;
+}
+
+Input:
+5
+1 2 3 4 5
+
+Output:
+3
+
+5
+1 2 3 4 5
+
+Output:
+3
