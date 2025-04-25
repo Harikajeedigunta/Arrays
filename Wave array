@@ -1,0 +1,38 @@
+C++ Code:
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    for(int i=0;i<n-1;i+=2)
+    {
+        // For even index v[i]>=v[i+1]
+        if(v[i]<v[i+1])
+        {
+            swap(v[i],v[i+1]);
+        }
+        // For odd index v[i]<=v[i+1]
+        if(i+2<n && v[i+1]>v[i+2])
+        {
+            swap(v[i+1],v[i+2]);
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<v[i]<<" ";
+    }
+}
+
+Input:
+6
+20 10 8 6 4 2
+
+Output:
+20 8 10 4 6 2 
