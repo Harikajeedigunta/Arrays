@@ -1,0 +1,79 @@
+C++ Code:
+Method 1:Brute Force
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    vector<int>nums;
+    for(int i=0;i<n;i++)
+    {
+        bool isleader=true;
+        for(int j=i+1;j<n;j++)
+        {
+            if(v[j]>=v[i])
+            {
+                isleader=false;
+                break;
+            }
+        }
+        if(isleader)
+        {
+            nums.push_back(v[i]);
+        }
+    }
+    for(auto it:nums)
+    {
+        cout<<it<<" ";
+    }
+}
+
+method 2:Optimized version
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    vector<int>nums;
+    for(int i=0;i<n;i++)
+    {
+        bool isleader=true;
+        for(int j=i+1;j<n;j++)
+        {
+            if(v[j]>=v[i])
+            {
+                isleader=false;
+                break;
+            }
+        }
+        if(isleader)
+        {
+            nums.push_back(v[i]);
+        }
+    }
+    for(auto it:nums)
+    {
+        cout<<it<<" ";
+    }
+}
+
+Input:
+6
+-3 4 5 1 -30 -10
+
+Output:
+5 1 -10 
