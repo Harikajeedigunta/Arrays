@@ -1,0 +1,154 @@
+C++ Code:
+Method 1:Brute Force
+#include<iostream>
+#include<vector>
+using namespace std;
+int toFindEquilibriumIndex(vector<int>& v,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        int left_sum=0;
+        int right_sum=0;
+        for(int j=0;j<i;j++)
+        {
+            left_sum+=v[j];
+        }
+        for(int j=i+1;j<n;j++)
+        {
+            right_sum+=v[j];
+        }
+        if(left_sum==right_sum)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    cout<<toFindEquilibriumIndex(v,n);
+}
+
+Method 2:Optimal
+#include<iostream>
+#include<vector>
+using namespace std;
+int equilibriumIndex(vector<int>& v,int n)
+{
+    int total_sum=0;
+    for(int i=0;i<n;i++)
+    {
+        total_sum+=v[i];
+    }
+    int left_sum=0;
+    for(int i=0;i<n;i++)
+    {
+        int right_sum=total_sum-left_sum-v[i];
+        if(left_sum==right_sum)
+        {
+            return i;
+        }
+        left_sum+=v[i];
+    }
+    return -1;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>v[i];
+    }
+    cout<<equilibriumIndex(v,n);
+}
+
+Java Code:
+Method 1:Brute Force:
+import java.util.*;
+class Solution
+{
+    public static int equlibriumIndex(ArrayList<Integer> list)
+    {
+        for(int i=0;i<list.size();i++)
+        {
+            int left_sum=0;
+            int right_sum=0;
+            for(int j=0;j<i;j++)
+            {
+                left_sum+=list.get(j);
+            }
+            for(int j=i+1;j<list.size();j++)
+            {
+                right_sum+=list.get(j);
+            }
+            if(left_sum==right_sum)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            list.add(sc.nextInt());
+        }
+        System.out.print(equlibriumIndex(list));
+    }
+}
+
+Method 2:Optimal
+import java.util.*;
+class Solution
+{
+    public static int equilibriumIndex(ArrayList<Integer> list)
+    {
+        int total_sum=0;
+        for(int i=0;i<list.size();i++)
+        {
+            total_sum+=list.get(i);
+        }
+        int left_sum=0;
+        for(int i=0;i<list.size();i++)
+        {
+            int right_sum=total_sum-left_sum-list.get(i);
+            if(left_sum==right_sum)
+            {
+                return i;
+            }
+            left_sum+=list.get(i);
+        }
+        return -1;
+    }
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            list.add(sc.nextInt());
+        }
+        System.out.print(equilibriumIndex(list));
+    }
+}
+
+Input:
+5
+1 3 5 2 2
+
+Output:
+2
